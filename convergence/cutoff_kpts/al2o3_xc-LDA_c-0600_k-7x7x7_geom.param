@@ -1,0 +1,40 @@
+#######################################################
+#CASTEP param file: /local/scratch/jks/Al2O3/convergence/cutoff/al2o3_xc-LDA_c-0600_k-7x7x7_geom.param
+#Created using the Atomic Simulation Environment (ASE)#
+# Internal settings of the calculator
+# This can be switched off by settings
+# calc._export_settings = False
+# If stated, this will be automatically processed
+# by ase.io.castep.read_seed()
+# ASE_INTERFACE _build_missing_pspots : True
+# ASE_INTERFACE _castep_command : export OMP_NUM_THREADS=1; /software/openmpi/1.6.5/gfortran_4.8.2/bin/mpirun -np 9 /home/shentonj/coding/CASTEP-19.11/bin/linux_x86_64_gfortran7.0--mpi/castep.mpi
+# ASE_INTERFACE _castep_pp_path : /local/scratch/jks/Al2O3
+# ASE_INTERFACE _check_checkfile : True
+# ASE_INTERFACE _copy_pspots : False
+# ASE_INTERFACE _directory : /local/scratch/jks/Al2O3/convergence/cutoff
+# ASE_INTERFACE _export_settings : True
+# ASE_INTERFACE _find_pspots : False
+# ASE_INTERFACE _force_write : True
+# ASE_INTERFACE _label : al2o3_xc-LDA_c-0600_k-7x7x7_geom
+# ASE_INTERFACE _link_pspots : True
+# ASE_INTERFACE _pedantic : False
+# ASE_INTERFACE _prepare_input_only : False
+# ASE_INTERFACE _rename_existing_dir : False
+# ASE_INTERFACE _set_atoms : True
+# ASE_INTERFACE _track_output : False
+# ASE_INTERFACE _try_reuse : False
+#######################################################
+
+TASK: GeometryOptimisation
+CUT_OFF_ENERGY: 600.0 
+WRITE_CIF_STRUCTURE: TRUE
+WRITE_CELL_STRUCTURE: TRUE
+OPT_STRATEGY: speed
+XC_FUNCTIONAL: lda
+NUM_DUMP_CYCLES: 0
+GEOM_METHOD: LBFGS
+GEOM_MAX_ITER: 150
+GEOM_ENERGY_TOL: 1e-05 
+GEOM_FORCE_TOL: 0.01 
+GEOM_DISP_TOL: 0.001 
+GEOM_STRESS_TOL: 0.1 

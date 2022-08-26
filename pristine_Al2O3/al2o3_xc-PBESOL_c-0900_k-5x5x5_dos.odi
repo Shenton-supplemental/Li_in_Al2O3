@@ -1,0 +1,5 @@
+task: dos
+#pdos: species_ang
+EFERMI: optados
+DOS_SPACING: 0.1 
+BROADENING        : adaptive

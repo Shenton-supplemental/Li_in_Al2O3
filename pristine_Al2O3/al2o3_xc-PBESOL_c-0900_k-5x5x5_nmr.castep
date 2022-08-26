@@ -1,0 +1,1640 @@
+ +-------------------------------------------------+
+ |                                                 |
+ |      CCC   AA    SSS  TTTTT  EEEEE  PPPP        |
+ |     C     A  A  S       T    E      P   P       |
+ |     C     AAAA   SS     T    EEE    PPPP        |
+ |     C     A  A     S    T    E      P           |
+ |      CCC  A  A  SSS     T    EEEEE  P           |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ | Welcome to Academic Release CASTEP version 21.11|          
+ | Ab Initio Total Energy Program                  |
+ |                                                 |
+ | Authors:                                        |
+ | M. Segall, M. Probert, C. Pickard, P. Hasnip,   |
+ | S. Clark, K. Refson, J. R. Yates, M. Payne      |
+ |                                                 |
+ | Contributors:                                   |
+ | P. Lindan, P. Haynes, J. White, V. Milman,      |
+ | N. Govind, M. Gibson, P. Tulip, V. Cocula,      |
+ | B. Montanari, D. Quigley, M. Glover,            |
+ | L. Bernasconi, A. Perlov, M. Plummer,           |
+ | E. McNellis, J. Meyer, J. Gale, D. Jochym       |
+ | J. Aarons, B. Walker, R. Gillen, D. Jones       |
+ | T. Green, I. J. Bush, C. J. Armstrong,          |
+ | E. J. Higgins, E. L. Brown, M. S. McFly,        |
+ | J. Wilkins, B-C. Shih, P. J. P. Byrne,          |
+ | R. J. Maurer, J. C. Womack, J. Dziedzic,        |
+ | A. Bartok-Partay, L. LeBlanc                    |
+ |                                                 |
+ | Copyright (c) 2000 - 2021                       |
+ |                                                 |
+ |     Distributed under license from Cambridge    |
+ |     Enterprise for academic use only.           |
+ |                                                 |
+ | Please cite                                     |
+ |                                                 |
+ |     "First principles methods using CASTEP"     |
+ |                                                 |
+ |         Zeitschrift fuer Kristallographie       |
+ |           220(5-6) pp. 567-570 (2005)           |
+ |                                                 |
+ | S. J. Clark, M. D. Segall, C. J. Pickard,       |
+ | P. J. Hasnip, M. J. Probert, K. Refson,         |
+ | M. C. Payne                                     |
+ |                                                 |
+ |       in all publications arising from          |
+ |              your use of CASTEP                 |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ |              http://www.castep.org              |
+ |                                                 |
+ +-------------------------------------------------+
+
+
+
+ Compiled for linux_x86_64_gfortran10 on Fri, 14 Jan 2022 16:49:15 +0000
+ from code version Version unavailable
+ Compiler: GNU Fortran 10.3.0; Optimisation: fast
+ MATHLIBS: openblas (LAPACK version 3.9.0)
+ FFT Lib : fftw3 version fftw-3.3.10-sse2-avx-avx2-avx2_128-avx512
+ Fundamental constants values: CODATA 2014
+
+ Run started: Fri, 04 Feb 2022 10:13:09 +0000
+
+ ******************************* User Parameters *******************************
+iprint        : 2              # verbosity control (I)
+task          : MAGRES         # type of calculation (S)
+optstrategy   : speed          # optimization strategy (S)
+xcfunctional  : pbesol         # exchange-correlation functional (S)
+cutoffenergy  : 900.0000000 ev # maximum energy of planewaves in basis set (P)
+numdumpcycles : 0              # frequency of wavefunction dumps (I)
+magrestask    : NMR            # MAGRES run type (S)
+
+ *******************************************************************************
+  
+ +-------------------------------------------------+
+ |                                                 |
+ |           N   N    M   M    RRRR                |
+ |           NN  N    MM MM    R   R               |
+ |           N N N    M M M    RRRR                |
+ |           N  NN    M   M    R  R                |
+ |           N   N    M   M    R   R               |
+ |                                                 |
+ +-------------------------------------------------+
+ |                                                 |
+ | Welcome to Materials Studio CASTEP-NMR          |
+ |                                                 |
+ | Authors:                                        |
+ | J.R. Yates, C.J. Pickard, F. Mauri              |
+ |                                                 |
+ | Contributors:                                   |
+ | T.F.G. Green, S.A. Joyce, R.T. Strong,          |
+ | B-C. Shih                                       |
+ |                                                 |
+ | Copyright (c) 2004 - 2021                       |
+ |                                                 |
+ | Please cite the appropriate publications in all |
+ | work arising from your use of CASTEP NMR.       |
+ |                                                 |
+ | For NMR Shielding Tensors cite:                 |
+ |    "All-electron magnetic response with         |
+ |    pseudopotentials: NMR chemical shifts",      |
+ |    C. J. Pickard, F. Mauri;                     |
+ |    Physical Review B63 245101 (2001), and       |
+ |                                                 |
+ |    "Calculation of NMR Chemical Shifts          |
+ |    for extended systems using                   |
+ |    Ultrasoft Pseudopotentials",                 |
+ |    J. R. Yates, C. J. Pickard and F. Mauri      |
+ |    Physical Review B76 024401 (2007)            |
+ |                                                 |
+ | For Electric Field Gradients cite:              |
+ |   "Accurate First Principles Prediction of 17O  |
+ |    NMR Parameters in SiO2: Assignment of the    |
+ |    Zeolite Ferrierite Spectrum"                 |
+ |    M. Profeta, F. Mauri and C. J. Pickard       |
+ |    J. Amer. Chem. Soc. 125 541 (2003)           |
+ |                                                 |
+ | For Spin-Spin (J) Couplings cite:               |
+ |   "A first principles theory of NMR J-coupling  |
+ |   in solid-state systems"                       |
+ |   S.A. Joyce, J.R. Yates, C.J. Pickard, F. Mauri|
+ |   J. Chem. Phys. 127 204107 (2007)              |
+ |                                                 |
+ |   "Relativistic NMR J-coupling with ultrasoft   |
+ |   pseudopotentials and the zeroth-order regular |
+ |   approximation"                                |
+ |   T.F.G. Green and J.R. Yates                   |
+ |   J. Chem. Phys. 140 234106 (2014)              |
+ |                                                 |
+ +-------------------------------------------------+
+
+
+ Atomic calculation performed for O: 1s2 2s2 2p4
+
+ Converged in 57 iterations to an ae energy of -2034.019 eV
+
+    == Comparison of all-electron and pseudo eig ===
+    ==         taken from descreening step.      ===
+    == A more accurate error estimate is given   ===
+    == by using the scf pseudo test -            ===
+    == add [] to end of otfg string to activate  ===
+    AE l  no    occ        eig (Ha)                 
+    PS l  no               eig (Ha)         diff    
+    ================================================
+    ae 0   2   2.000    -0.8749487920
+    ps 0   2            -0.8749599405    -0.1115E-04
+    ae 1   1   4.000    -0.3297966080
+    ps 1   1            -0.3298023493    -0.5741E-05
+    ================================================
+   ============================================================                
+   | Pseudopotential Report - Date of generation  4-02-2022   |                
+   ------------------------------------------------------------                
+   | Element: O Ionic charge:  6.00 Level of theory: PBESOL   |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            2s              2.000           -0.875        |                
+   |            2p              4.000           -0.330        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.875   1.100     qc      0         |                
+   |          2      0    0.250   1.100     qc      0         |                
+   |          3      1   -0.330   1.100     qc      0         |                
+   |          4      1    0.250   1.100     qc      0         |                
+   |         loc     2    0.000   1.100     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 0.769                       |                
+   | Partial core correction Rc = 0.769                       |                
+   ------------------------------------------------------------                
+   | "2|1.1|17|20|23|20:21(qc=8)"                             |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Atomic calculation performed for Al: 1s2 2s2 2p6 3s2 3p1
+
+ Converged in 55 iterations to an ae energy of -6590.489 eV
+
+    == Comparison of all-electron and pseudo eig ===
+    ==         taken from descreening step.      ===
+    == A more accurate error estimate is given   ===
+    == by using the scf pseudo test -            ===
+    == add [] to end of otfg string to activate  ===
+    AE l  no    occ        eig (Ha)                 
+    PS l  no               eig (Ha)         diff    
+    ================================================
+    ae 0   3   2.000    -0.2835226939
+    ps 0   3            -0.2835236172    -0.9233E-06
+    ae 1   2   1.000    -0.0988403377
+    ps 1   2            -0.0988400873     0.2504E-06
+    ================================================
+   ============================================================                
+   | Pseudopotential Report - Date of generation  4-02-2022   |                
+   ------------------------------------------------------------                
+   | Element: Al Ionic charge:  3.00 Level of theory: PBESOL  |                
+   | Atomic Solver: Koelling-Harmon                           |                
+   |                                                          |                
+   |               Reference Electronic Structure             |                
+   |         Orbital         Occupation         Energy        |                
+   |            3s              2.000           -0.284        |                
+   |            3p              1.000           -0.099        |                
+   |                                                          |                
+   |                 Pseudopotential Definition               |                
+   |        Beta     l      e      Rc     scheme   norm       |                
+   |          1      0   -0.284   2.192     qc      0         |                
+   |          2      0    0.250   2.192     qc      0         |                
+   |          3      1   -0.099   2.192     qc      0         |                
+   |          4      1    0.250   2.192     qc      0         |                
+   |          5      2    0.000   2.000     qc      0         |                
+   |          6      2    0.250   2.000     qc      0         |                
+   |         loc     3    0.000   2.192     pn      0         |                
+   |                                                          |                
+   | Augmentation charge Rinner = 1.398                       |                
+   | Partial core correction Rc = 1.398                       |                
+   ------------------------------------------------------------                
+   | "3|2.2|2.2|1.4|4|5|5|30:31:32U2U2"                       |                
+   ------------------------------------------------------------                
+   |      Author: Chris J. Pickard, Cambridge University      |                
+   ============================================================                
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 33 iterations to a total energy of -431.1291 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 20 iterations to a total energy of -105.9172 eV
+Initialising basis set.
+
+Standard grid dimensions:  45  45  45
+Fine grid dimensions:      45  45  45
+
+Plane wave load balancing: max   5271 min   5226 average   5247
+True cut-off energy of basis :  33.074
+ Calculation parallelised over 4 processes.
+ Data is distributed by k-point(4-way)
+
+ ************************************ Title ************************************
+ 
+
+ ***************************** General Parameters ******************************
+  
+ output verbosity                               : verbose (2)
+ write checkpoint data to                       : al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.check
+ type of calculation                            : Magnetic Resonance
+ stress calculation                             : off
+ density difference calculation                 : off
+ electron localisation func (ELF) calculation   : off
+ Hirshfeld analysis                             : off
+ polarisation (Berry phase) analysis            : off
+ molecular orbital projected DOS                : off
+ deltaSCF calculation                           : off
+ unlimited duration calculation
+ timing information                             : on
+ memory usage estimate                          : on
+ write extra output files                       : on
+ write final potential to formatted file        : off
+ write final density to formatted file          : off
+ write BibTeX reference list                    : on
+ write OTFG pseudopotential files               : on
+ write electrostatic potential file             : on
+ write bands file                               : on
+ checkpoint writing                             : both castep_bin and check files
+  
+ output         length unit                     : A
+ output           mass unit                     : amu
+ output           time unit                     : ps
+ output         charge unit                     : e
+ output           spin unit                     : hbar/2
+ output         energy unit                     : eV
+ output          force unit                     : eV/A
+ output       velocity unit                     : A/ps
+ output       pressure unit                     : GPa
+ output     inv_length unit                     : 1/A
+ output      frequency unit                     : cm-1
+ output force constant unit                     : eV/A**2
+ output         volume unit                     : A**3
+ output   IR intensity unit                     : (D/A)**2/amu
+ output         dipole unit                     : D
+ output         efield unit                     : eV/A/e
+ output        entropy unit                     : J/mol/K
+ output    efield chi2 unit                     : pm/V
+  
+ wavefunctions paging                           : none
+ random number generator seed                   : randomised (101309101)
+ data distribution                              : optimal for this architecture
+ optimization strategy                          : maximize speed(+++)
+
+ *********************** Exchange-Correlation Parameters ***********************
+  
+ using functional                               : PBE for solids (2008)
+ relativistic treatment                         : Koelling-Harmon
+ DFT+D: Semi-empirical dispersion correction    : off
+
+ ************************* Pseudopotential Parameters **************************
+  
+ pseudopotential representation                 : reciprocal space
+ <beta|phi> representation                      : reciprocal space
+ spin-orbit coupling                            : off
+
+ **************************** Basis Set Parameters *****************************
+  
+ plane wave basis set cut-off                   :   900.0000   eV
+ size of standard grid                          :     1.7500
+ size of   fine   gmax                          :    26.8966   1/A
+ finite basis set correction                    : none
+
+ **************************** Electronic Parameters ****************************
+  
+ number of  electrons                           :  48.00    
+ net charge of system                           :  0.000    
+ treating system as non-spin-polarized
+ number of bands                                :         29
+
+ ********************* Electronic Minimization Parameters **********************
+  
+ Method: Treating system as metallic with density mixing treatment of electrons,
+         and number of  SD  steps               :          1
+         and number of  CG  steps               :          4
+  
+ total energy / atom convergence tol.           : 0.1000E-07   eV
+ eigen-energy convergence tolerance             : 0.4167E-08   eV
+ max force / atom convergence tol.              : ignored
+ convergence tolerance window                   :          3   cycles
+ max. number of SCF cycles                      :         30
+ number of fixed-spin iterations                :         10
+ smearing scheme                                : Gaussian
+ smearing width                                 : 0.2000       eV
+ Fermi energy convergence tolerance             : 0.2721E-13   eV
+ periodic dipole correction                     : NONE
+
+ ************************** Density Mixing Parameters **************************
+  
+ density-mixing scheme                          : Broyden
+ max. length of mixing history                  :         20
+ charge density mixing amplitude                : 0.8000    
+ cut-off energy for mixing                      :  900.0       eV
+
+ *********************** Population Analysis Parameters ************************
+  
+ Population analysis with cutoff                :  3.000       A
+ Population analysis output                     : summary and pdos components
+
+ ************************ Magnetic Resonance Parameters ************************
+  
+ Magnetic Resonance Property                    : Chemical Shielding + EFG
+ Position Operator Method                       : crystal
+ max. number of MagRes CG steps                 :        250
+ convergence tolerance window                   :          2   cycles
+ energy convergence tolerance                   : 0.1000E-11   eV
+ band convergence tolerance                     : 0.1000E-08   eV
+
+ *******************************************************************************
+  
+
+                           -------------------------------
+                                      Unit Cell
+                           -------------------------------
+        Real Lattice(A)                      Reciprocal Lattice(1/A)
+     2.3861830     1.3776650     4.3375540        1.316576930   0.760124873   0.482851484
+    -2.3861800     1.3776620     4.3375540       -1.316577886   0.760126466   0.482851889
+    -0.0000010    -2.7553270     4.3375530        0.000000956  -1.520251689   0.482851686
+
+                       Lattice parameters(A)       Cell Angles
+                    a =      5.138697          alpha =   55.337042
+                    b =      5.138695          beta  =   55.337093
+                    c =      5.138696          gamma =   55.337035
+
+                       Current cell volume =            85.554476       A**3
+                                   density =             2.383541   AMU/A**3
+                                           =             3.957962     g/cm^3
+
+                           -------------------------------
+                                     Cell Contents
+                           -------------------------------
+                         Total number of ions in cell =   10
+                      Total number of species in cell =    2
+                        Max number of any one species =    6
+
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+            x  Element    Atom        Fractional coordinates of atoms  x
+            x            Number           u          v          w      x
+            x----------------------------------------------------------x
+            x  O            1         0.556103   0.943897   0.250000   x 
+            x  O            2         0.943897   0.250000   0.556103   x 
+            x  O            3         0.250000   0.556103   0.943897   x 
+            x  O            4         0.056103   0.750000   0.443897   x 
+            x  O            5         0.750000   0.443897   0.056103   x 
+            x  O            6         0.443897   0.056103   0.750000   x 
+            x  Al           1         0.147922   0.147922   0.147922   x 
+            x  Al           2         0.647922   0.647922   0.647922   x 
+            x  Al           3         0.852078   0.852078   0.852078   x 
+            x  Al           4         0.352078   0.352078   0.352078   x 
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+                         No user defined ionic velocities
+
+                           -------------------------------
+                                   Details of Species
+                           -------------------------------
+
+                               Mass of species in AMU
+                                    O   15.9994000
+                                    Al   26.9815400
+
+                          Electric Quadrupole Moment (Barn)
+                                    O   -0.0255800 Isotope 17
+                                    Al    0.1466000 Isotope 27
+
+                          Files used for pseudopotentials:
+                                    O 2|1.1|17|20|23|20:21(qc=8)
+                                    Al 3|2.2|2.2|1.4|4|5|5|30:31:32U2U2
+
+                           -------------------------------
+                              k-Points For BZ Sampling
+                           -------------------------------
+                       MP grid size for SCF calculation is  5  5  5
+                            with an offset of   0.000  0.000  0.000
+                       Number of kpoints used =            19
+
+             +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+             +  Number       Fractional coordinates        Weight  +
+             +-----------------------------------------------------+
+             +     1  -0.400000   0.000000  -0.200000   0.0960000  +
+             +     2  -0.400000   0.200000   0.000000   0.0960000  +
+             +     3  -0.400000   0.200000   0.400000   0.0960000  +
+             +     4  -0.400000   0.400000  -0.400000   0.0480000  +
+             +     5  -0.200000  -0.200000  -0.200000   0.0160000  +
+             +     6  -0.200000   0.400000   0.200000   0.0960000  +
+             +     7   0.000000  -0.400000   0.400000   0.0480000  +
+             +     8   0.000000   0.000000   0.000000   0.0080000  +
+             +     9   0.000000   0.200000   0.000000   0.0480000  +
+             +    10   0.000000   0.200000   0.200000   0.0480000  +
+             +    11   0.000000   0.400000   0.000000   0.0480000  +
+             +    12   0.000000   0.400000   0.400000   0.0480000  +
+             +    13   0.200000  -0.400000  -0.400000   0.0480000  +
+             +    14   0.200000  -0.400000   0.200000   0.0480000  +
+             +    15   0.200000  -0.200000  -0.200000   0.0480000  +
+             +    16   0.200000  -0.200000   0.000000   0.0480000  +
+             +    17   0.200000   0.400000   0.200000   0.0480000  +
+             +    18   0.200000   0.400000   0.400000   0.0480000  +
+             +    19   0.400000   0.400000   0.400000   0.0160000  +
+             +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+                           -------------------------------
+                               Symmetry and Constraints
+                           -------------------------------
+
+                      Maximum deviation from symmetry = 0.204665E-14     ANG
+
+                      Number of symmetry operations   =          12
+                      Number of ionic constraints     =           3
+                      Point group of crystal =    20: D3d, -3m, -3 2/m
+                      Space group of crystal =   167: R-3c, -R 3 2"c
+
+                    1 rotation    
+                 (   1.00000000000   0.00000000000   0.00000000000 )
+                 (   0.00000000000   1.00000000000   0.00000000000 )
+                 (  -0.00000000000   0.00000000000   1.00000000000 )
+                    1 displacement
+                 (   0.00000000000   0.00000000000   0.00000000000 )
+                      symmetry related atoms: 
+             O:    1    2    3    4    5    6
+             Al:    1    2    3    4
+
+                    2 rotation    
+                 (  -1.00000000000  -0.00000000000  -0.00000000000 )
+                 (  -0.00000000000  -1.00000000000  -0.00000000000 )
+                 (   0.00000000000  -0.00000000000  -1.00000000000 )
+                    2 displacement
+                 (   0.99999975204  -0.00000000000   0.99999987602 )
+                      symmetry related atoms: 
+             O:    6    4    5    2    3    1
+             Al:    3    4    1    2
+
+                    3 rotation    
+                 (  -0.49999893175   0.86602601269   0.00000020954 )
+                 (  -0.86602479488  -0.50000106825  -0.00000036293 )
+                 (   0.00000023054  -0.00000013311   1.00000000000 )
+                    3 displacement
+                 (   0.99999993801   0.00000012398   0.99999993801 )
+                      symmetry related atoms: 
+             O:    3    1    2    6    4    5
+             Al:    1    2    3    4
+
+                    4 rotation    
+                 (   0.49999893175  -0.86602601269  -0.00000020954 )
+                 (   0.86602479488   0.50000106825   0.00000036293 )
+                 (  -0.00000023054   0.00000013311  -1.00000000000 )
+                    4 displacement
+                 (   0.99999981403   0.99999987602   0.99999993801 )
+                      symmetry related atoms: 
+             O:    5    6    4    1    2    3
+             Al:    3    4    1    2
+
+                    5 rotation    
+                 (  -0.50000106825  -0.86602601269  -0.00000020954 )
+                 (   0.86602479488  -0.49999893175  -0.00000036293 )
+                 (   0.00000023054   0.00000013311   1.00000000000 )
+                    5 displacement
+                 (   0.99999987602   0.00000006199   0.00000006199 )
+                      symmetry related atoms: 
+             O:    2    3    1    5    6    4
+             Al:    1    2    3    4
+
+                    6 rotation    
+                 (   0.50000106825   0.86602601269   0.00000020954 )
+                 (  -0.86602479488   0.49999893175   0.00000036293 )
+                 (  -0.00000023054  -0.00000013311  -1.00000000000 )
+                    6 displacement
+                 (   0.99999987602   0.99999993801   0.99999981403 )
+                      symmetry related atoms: 
+             O:    4    5    6    3    1    2
+             Al:    3    4    1    2
+
+                    7 rotation    
+                 (  -0.50000002055   0.86602538407   0.00000020954 )
+                 (   0.86602539977   0.50000002055   0.00000036293 )
+                 (  -0.00000007685  -0.00000013311  -1.00000000000 )
+                    7 displacement
+                 (   0.49999981403   0.50000000000   0.49999981403 )
+                      symmetry related atoms: 
+             O:    3    2    1    4    6    5
+             Al:    4    3    2    1
+
+                    8 rotation    
+                 (   0.50000002055  -0.86602538407  -0.00000020954 )
+                 (  -0.86602539977  -0.50000002055  -0.00000036293 )
+                 (   0.00000007685   0.00000013311   1.00000000000 )
+                    8 displacement
+                 (   0.49999993801   0.50000000000   0.50000006199 )
+                      symmetry related atoms: 
+             O:    5    4    6    2    1    3
+             Al:    2    1    4    3
+
+                    9 rotation    
+                 (   1.00000000000   0.00000125724  -0.00000000000 )
+                 (  -0.00000120978  -1.00000000000  -0.00000000000 )
+                 (  -0.00000030739  -0.00000000000  -1.00000000000 )
+                    9 displacement
+                 (   0.49999987602   0.49999987602   0.49999987602 )
+                      symmetry related atoms: 
+             O:    1    3    2    5    4    6
+             Al:    4    3    2    1
+
+                   10 rotation    
+                 (  -1.00000000000  -0.00000125724   0.00000000000 )
+                 (   0.00000120978   1.00000000000   0.00000000000 )
+                 (   0.00000030739   0.00000000000   1.00000000000 )
+                   10 displacement
+                 (   0.49999987602   0.50000012398   0.50000000000 )
+                      symmetry related atoms: 
+             O:    6    5    4    3    2    1
+             Al:    2    1    4    3
+
+                   11 rotation    
+                 (  -0.49999997945  -0.86602664131  -0.00000020954 )
+                 (  -0.86602418999   0.49999997945   0.00000036293 )
+                 (  -0.00000007685   0.00000013311  -1.00000000000 )
+                   11 displacement
+                 (   0.49999975204   0.49999993801   0.49999993801 )
+                      symmetry related atoms: 
+             O:    2    1    3    6    5    4
+             Al:    4    3    2    1
+
+                   12 rotation    
+                 (   0.49999997945   0.86602664131   0.00000020954 )
+                 (   0.86602418999  -0.49999997945  -0.00000036293 )
+                 (   0.00000007685  -0.00000013311   1.00000000000 )
+                   12 displacement
+                 (   0.50000000000   0.50000006199   0.49999993801 )
+                      symmetry related atoms: 
+             O:    4    6    5    1    3    2
+             Al:    2    1    4    3
+
+
+                         Centre of mass is constrained
+
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx....
+            x  Species       atom   co-ordinate  constraints.....         
+            x-------------------------------------------------------------....
+            x O                 1       x        29165.1220      0.0000      0.0000
+            x O                 1       y            0.0000  29165.1220      0.0000
+            x O                 1       z            0.0000      0.0000  29165.1220
+            x O                 2       x        29165.1220      0.0000      0.0000
+            x O                 2       y            0.0000  29165.1220      0.0000
+            x O                 2       z            0.0000      0.0000  29165.1220
+            x O                 3       x        29165.1220      0.0000      0.0000
+            x O                 3       y            0.0000  29165.1220      0.0000
+            x O                 3       z            0.0000      0.0000  29165.1220
+            x O                 4       x        29165.1220      0.0000      0.0000
+            x O                 4       y            0.0000  29165.1220      0.0000
+            x O                 4       z            0.0000      0.0000  29165.1220
+            x O                 5       x        29165.1220      0.0000      0.0000
+            x O                 5       y            0.0000  29165.1220      0.0000
+            x O                 5       z            0.0000      0.0000  29165.1220
+            x O                 6       x        29165.1220      0.0000      0.0000
+            x O                 6       y            0.0000  29165.1220      0.0000
+            x O                 6       z            0.0000      0.0000  29165.1220
+            x Al                1       x        49184.3386      0.0000      0.0000
+            x Al                1       y            0.0000  49184.3386      0.0000
+            x Al                1       z            0.0000      0.0000  49184.3386
+            x Al                2       x        49184.3386      0.0000      0.0000
+            x Al                2       y            0.0000  49184.3386      0.0000
+            x Al                2       z            0.0000      0.0000  49184.3386
+            x Al                3       x        49184.3386      0.0000      0.0000
+            x Al                3       y            0.0000  49184.3386      0.0000
+            x Al                3       z            0.0000      0.0000  49184.3386
+            x Al                4       x        49184.3386      0.0000      0.0000
+            x Al                4       y            0.0000  49184.3386      0.0000
+            x Al                4       z            0.0000      0.0000  49184.3386
+            xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx....
+
+                         Number of cell constraints= 0
+                         Cell constraints are:  1 2 3 4 5 6
+
+                         External pressure/stress (GPa)
+                          0.00000   0.00000   0.00000
+                                    0.00000   0.00000
+                                              0.00000
+  
++---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+|                                                     Memory          Disk    |
+| Baseline code, static data and system overhead      250.0 MB         0.0 MB |
+| BLAS internal memory storage                          0.0 MB         0.0 MB |
+| Model and support data                              483.0 MB         0.0 MB |
+| Electronic energy minimisation requirements          53.7 MB         0.0 MB |
+| Force calculation requirements                       13.2 MB         0.0 MB |
+|                                               ----------------------------- |
+| Approx. total storage required per process          786.7 MB         0.0 MB |
+|                                                                             |
+| Requirements will fluctuate during execution and may exceed these estimates |
++-----------------------------------------------------------------------------+
+Calculating approximate eigenstates for fixed initial Hamiltonian
+Cut-off for approx. calculation is   89.988 eV
+Initialising basis set.
+
+Standard grid dimensions:  15  15  15
+Fine grid dimensions:      45  45  45
+
+Plane wave load balancing: max    175 min    158 average    165
+True cut-off energy of basis :   3.303
+Improving approx. states at cut-off of  450.000 eV
+Initialising basis set.
+
+Standard grid dimensions:  32  32  32
+Fine grid dimensions:      45  45  45
+
+Plane wave load balancing: max   1869 min   1837 average   1854
+True cut-off energy of basis :  16.537
+Refining calculation on full k-point grid
+Resetting cut-off to  900.000 eV
+Initialising basis set.
+
+Standard grid dimensions:  45  45  45
+Fine grid dimensions:      45  45  45
+
+Plane wave load balancing: max   5271 min   5226 average   5247
+True cut-off energy of basis :  33.074
+Fermi energy for electrons =  4.1145E+000 eV [lower bound; range =  1.55E-014 eV]
+Calculating total energy with cut-off of  900.000 eV.
+electronic_minimisation: Initialising density mixing
+ 
+Init
+Total free energy (E-TS)         =     -2958.21763465490357703 eV
+ 
+NB est. 0K energy (E-0.5TS)      =     -2958.21763465490357703 eV
+------------------------------------------------------------------------ <-- SCF
+SCF loop      Energy           Fermi           Energy gain       Timer   <-- SCF
+                               energy          per atom          (sec)   <-- SCF
+------------------------------------------------------------------------ <-- SCF
+Initial  -2.95821763E+003  0.00000000E+000                         9.36  <-- SCF
+      1  -3.09366187E+003  3.51938330E+000   1.35444231E+001      12.35  <-- SCF
+ Density was not mixed in this cycle
+      2  -3.09382650E+003  3.52100488E+000   1.64630390E-002      15.23  <-- SCF
+ Norm of density residual is   0.10586719898980508     
+      3  -3.09160469E+003  6.69529319E+000  -2.22180399E-001      18.55  <-- SCF
+ Norm of density residual is    7.8646649265017674E-002
+      4  -3.08936265E+003  5.43225377E+000  -2.24204162E-001      21.95  <-- SCF
+ Norm of density residual is    7.1907267214184082E-003
+      5  -3.08936669E+003  5.49899799E+000   4.03576108E-004      25.25  <-- SCF
+ Norm of density residual is    2.3215071310119027E-003
+      6  -3.08936791E+003  5.53860402E+000   1.22716291E-004      28.10  <-- SCF
+ Norm of density residual is    2.2925100908666968E-004
+      7  -3.08936798E+003  5.53872996E+000   6.60634294E-006      31.44  <-- SCF
+ Norm of density residual is    1.0351503716377121E-004
+      8  -3.08936798E+003  5.53798596E+000   4.66468634E-007      34.52  <-- SCF
+ Norm of density residual is    1.9837373128162438E-005
+      9  -3.08936798E+003  5.53819939E+000   1.34773977E-008      36.80  <-- SCF
+ Norm of density residual is    9.1067086302521428E-006
+     10  -3.08936798E+003  5.53836321E+000  -2.10421202E-009      38.87  <-- SCF
+ Norm of density residual is    1.6764186760975555E-006
+     11  -3.08936798E+003  5.53839449E+000   6.69449939E-010      41.10  <-- SCF
+ Norm of density residual is    6.2467444541323897E-007
+------------------------------------------------------------------------ <-- SCF
+Total energy has converged after 11 SCF iterations.
+ 
+Final energy, E             =  -3089.367984308     eV
+Final free energy (E-TS)    =  -3089.367984308     eV
+(energies not corrected for finite basis set)
+ 
+NB est. 0K energy (E-0.5TS)      =  -3089.367984308     eV
+ 
+There are 29 bands in total at each k-point and spin
+Bands below band 21 are completely full                           <- occ
+Bands above band 25 are completely empty                          <- occ
+Band energies and occupancies for bands close to Fermi energy     <- occ
+Smearing width is  0.200 eV                                       <- occ
+Spin 1, kpoint (-0.400000  0.000000 -0.200000 ) weight = 0.096000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.365917E+01    |   1.00000      |                   <- occ
+|    22  |   0.382074E+01    |   1.00000      |                   <- occ
+|    23  |   0.419508E+01    |   1.00000      |                   <- occ
+|    24  |   0.428496E+01    |   1.00000      |                   <- occ
+|    25  |   0.128319E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint (-0.200000 -0.200000 -0.200000 ) weight = 0.016000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.404627E+01    |   1.00000      |                   <- occ
+|    22  |   0.404627E+01    |   1.00000      |                   <- occ
+|    23  |   0.446202E+01    |   1.00000      |                   <- occ
+|    24  |   0.446202E+01    |   1.00000      |                   <- occ
+|    25  |   0.112650E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.000000  0.200000  0.000000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.381276E+01    |   1.00000      |                   <- occ
+|    22  |   0.414827E+01    |   1.00000      |                   <- occ
+|    23  |   0.443489E+01    |   1.00000      |                   <- occ
+|    24  |   0.447019E+01    |   1.00000      |                   <- occ
+|    25  |   0.114554E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.200000 -0.400000 -0.400000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.351124E+01    |   1.00000      |                   <- occ
+|    22  |   0.371474E+01    |   1.00000      |                   <- occ
+|    23  |   0.374175E+01    |   1.00000      |                   <- occ
+|    24  |   0.411432E+01    |   1.00000      |                   <- occ
+|    25  |   0.141896E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.200000  0.400000  0.200000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.377681E+01    |   1.00000      |                   <- occ
+|    22  |   0.388693E+01    |   1.00000      |                   <- occ
+|    23  |   0.425990E+01    |   1.00000      |                   <- occ
+|    24  |   0.427096E+01    |   1.00000      |                   <- occ
+|    25  |   0.122870E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint (-0.400000  0.200000  0.000000 ) weight = 0.096000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.357601E+01    |   1.00000      |                   <- occ
+|    22  |   0.380977E+01    |   1.00000      |                   <- occ
+|    23  |   0.416165E+01    |   1.00000      |                   <- occ
+|    24  |   0.427053E+01    |   1.00000      |                   <- occ
+|    25  |   0.137305E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint (-0.200000  0.400000  0.200000 ) weight = 0.096000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.357488E+01    |   1.00000      |                   <- occ
+|    22  |   0.380242E+01    |   1.00000      |                   <- occ
+|    23  |   0.408238E+01    |   1.00000      |                   <- occ
+|    24  |   0.418945E+01    |   1.00000      |                   <- occ
+|    25  |   0.137177E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.000000  0.200000  0.200000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.371254E+01    |   1.00000      |                   <- occ
+|    22  |   0.400937E+01    |   1.00000      |                   <- occ
+|    23  |   0.434663E+01    |   1.00000      |                   <- occ
+|    24  |   0.445754E+01    |   1.00000      |                   <- occ
+|    25  |   0.116487E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.200000 -0.400000  0.200000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.353958E+01    |   1.00000      |                   <- occ
+|    22  |   0.371329E+01    |   1.00000      |                   <- occ
+|    23  |   0.401708E+01    |   1.00000      |                   <- occ
+|    24  |   0.413370E+01    |   1.00000      |                   <- occ
+|    25  |   0.137002E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.200000  0.400000  0.400000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.353482E+01    |   1.00000      |                   <- occ
+|    22  |   0.399564E+01    |   1.00000      |                   <- occ
+|    23  |   0.406293E+01    |   1.00000      |                   <- occ
+|    24  |   0.422777E+01    |   1.00000      |                   <- occ
+|    25  |   0.126749E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint (-0.400000  0.200000  0.400000 ) weight = 0.096000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.349086E+01    |   1.00000      |                   <- occ
+|    22  |   0.380393E+01    |   1.00000      |                   <- occ
+|    23  |   0.394205E+01    |   1.00000      |                   <- occ
+|    24  |   0.398862E+01    |   1.00000      |                   <- occ
+|    25  |   0.137286E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.000000 -0.400000  0.400000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.360025E+01    |   1.00000      |                   <- occ
+|    22  |   0.376435E+01    |   1.00000      |                   <- occ
+|    23  |   0.384500E+01    |   1.00000      |                   <- occ
+|    24  |   0.427052E+01    |   1.00000      |                   <- occ
+|    25  |   0.139223E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.000000  0.400000  0.000000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.358413E+01    |   1.00000      |                   <- occ
+|    22  |   0.387863E+01    |   1.00000      |                   <- occ
+|    23  |   0.427412E+01    |   1.00000      |                   <- occ
+|    24  |   0.430779E+01    |   1.00000      |                   <- occ
+|    25  |   0.130796E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.200000 -0.200000 -0.200000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.344166E+01    |   1.00000      |                   <- occ
+|    22  |   0.393826E+01    |   1.00000      |                   <- occ
+|    23  |   0.425298E+01    |   1.00000      |                   <- occ
+|    24  |   0.427900E+01    |   1.00000      |                   <- occ
+|    25  |   0.130029E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.400000  0.400000  0.400000 ) weight = 0.016000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.407101E+01    |   1.00000      |                   <- occ
+|    22  |   0.407101E+01    |   1.00000      |                   <- occ
+|    23  |   0.427494E+01    |   1.00000      |                   <- occ
+|    24  |   0.427494E+01    |   1.00000      |                   <- occ
+|    25  |   0.125076E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint (-0.400000  0.400000 -0.400000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.376854E+01    |   1.00000      |                   <- occ
+|    22  |   0.378446E+01    |   1.00000      |                   <- occ
+|    23  |   0.401233E+01    |   1.00000      |                   <- occ
+|    24  |   0.406569E+01    |   1.00000      |                   <- occ
+|    25  |   0.134198E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.000000  0.000000  0.000000 ) weight = 0.008000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.404225E+01    |   1.00000      |                   <- occ
+|    22  |   0.449840E+01    |   1.00000      |                   <- occ
+|    23  |   0.449841E+01    |   1.00000      |                   <- occ
+|    24  |   0.454100E+01    |   1.00000      |                   <- occ
+|    25  |   0.105830E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.000000  0.400000  0.400000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.339624E+01    |   1.00000      |                   <- occ
+|    22  |   0.382294E+01    |   1.00000      |                   <- occ
+|    23  |   0.395364E+01    |   1.00000      |                   <- occ
+|    24  |   0.423547E+01    |   1.00000      |                   <- occ
+|    25  |   0.134804E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Spin 1, kpoint ( 0.200000 -0.200000  0.000000 ) weight = 0.048000
++--------+-------------------+----------------+
+|  Band  |   Eigenvalue      |    Occupancy   |                   <- occ
++--------+-------------------+----------------+                   <- occ
+|    21  |   0.367302E+01    |   1.00000      |                   <- occ
+|    22  |   0.400010E+01    |   1.00000      |                   <- occ
+|    23  |   0.433516E+01    |   1.00000      |                   <- occ
+|    24  |   0.444102E+01    |   1.00000      |                   <- occ
+|    25  |   0.124757E+02    |   0.00000      |                   <- occ
++--------+-------------------+----------------+                   <- occ
+Have a nice day.
+
+Writing analysis data to al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.castep_bin
+
+Writing model to al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.check
+
+  =====================================================================
+  +       Calculation of Nuclear Magnetic Resonance Parameters        +
+  + ================================================================= +
+
+  Starting Calculation of Electric Field Gradient Tensors         |<-- EFG
+  +---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+  |                                                     Memory          Disk    |
+  | Model and support data                              489.2 MB         0.0 MB |
+  | NMR EFG calculation requirements                     34.2 MB         0.0 MB |
+  |                                               ----------------------------- |
+  | Approx. total storage required per process          523.4 MB         0.0 MB |
+  |                                                                             |
+  | Requirements will fluctuate during execution and may exceed these estimates |
+  +-----------------------------------------------------------------------------+
+  Time for Diagonalize Hamiltonian                       8.18 sec |<-- EFG
+  Total Time for EFG Tensors                      11.20 sec       |<-- EFG
+
+  Starting Calculation of Chemical Shielding Tensors              |<-- NMR
+  +---------------- MEMORY AND SCRATCH DISK ESTIMATES PER PROCESS --------------+
+  |                                                     Memory          Disk    |
+  | Model and support data                              489.2 MB         0.0 MB |
+  | NMR chemical shift calculation requirements          51.8 MB         0.0 MB |
+  |                                               ----------------------------- |
+  | Approx. total storage required per process          541.1 MB         0.0 MB |
+  |                                                                             |
+  | Requirements will fluctuate during execution and may exceed these estimates |
+  +-----------------------------------------------------------------------------+
+  Starting k-point:   1 of   5                                    |<-- NMR
+  Diag Hamiltonian (k)   conv in   1 iter.    Time:      0.28 sec |<-- NMR
+  Time for Diamagnetic Augmentation                      0.01 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      3.47 sec |<-- NMR
+  Green function converged in  32 iterations. Time:      2.78 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      3.28 sec |<-- NMR
+  Total Time for nmr_susceptibility               10.34 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      1.99 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.07 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.33 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.01 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Total Time for step 1 of 6:                      6.98 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.17 sec |<-- NMR
+  Time for Velocity operator                             0.06 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.24 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.30 sec |<-- NMR
+  Time for Chi                                           0.12 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.19 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.12 sec |<-- NMR
+  Total Time for step 2 of 6:                      7.59 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.19 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.51 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.23 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Time for Velocity operator                             0.03 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.05 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 3 of 6:                      7.64 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.06 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.11 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.25 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.48 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.22 sec |<-- NMR
+  Time for Chi                                           0.15 sec |<-- NMR
+  Total Time for step 4 of 6:                      7.58 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      1.92 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.18 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.26 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.11 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.20 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Total Time for step 5 of 6:                      7.07 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.06 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.17 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.19 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      1.99 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.19 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Total Time for step 6 of 6:                      6.97 sec       |<-- NMR
+  Green function converged in  28 iterations. Time:      2.42 sec |<-- NMR
+  Green function converged in  28 iterations. Time:      2.56 sec |<-- NMR
+  Green function converged in  28 iterations. Time:      2.73 sec |<-- NMR
+  Time for USP L Augment                                 8.56 sec |<-- NMR
+  Total Time for k-point:   1 of   5              63.03 sec       |<-- NMR
+  Starting k-point:   2 of   5                                    |<-- NMR
+  Diag Hamiltonian (k)   conv in   1 iter.    Time:      0.29 sec |<-- NMR
+  Time for Diamagnetic Augmentation                      0.01 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      2.70 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      2.73 sec |<-- NMR
+  Green function converged in  27 iterations. Time:      2.45 sec |<-- NMR
+  Total Time for nmr_susceptibility                8.54 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.20 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.24 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.19 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.97 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.12 sec |<-- NMR
+  Total Time for step 1 of 6:                      7.22 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.19 sec |<-- NMR
+  Time for Velocity operator                             0.06 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.00 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.31 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.27 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Total Time for step 2 of 6:                      7.45 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.00 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.31 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.32 sec |<-- NMR
+  Time for Chi                                           0.13 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.25 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.27 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Total Time for step 3 of 6:                      7.60 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.16 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.27 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.25 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.32 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.26 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Total Time for step 4 of 6:                      7.73 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  14 iter.    Time:      2.43 sec |<-- NMR
+  Time for Velocity operator                             0.07 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.54 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.29 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.39 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.30 sec |<-- NMR
+  Time for Chi                                           0.12 sec |<-- NMR
+  Total Time for step 5 of 6:                      8.43 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  14 iter.    Time:      2.27 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.29 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.36 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Total Time for step 6 of 6:                      7.78 sec       |<-- NMR
+  Green function converged in  27 iterations. Time:      2.52 sec |<-- NMR
+  Green function converged in  27 iterations. Time:      2.59 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.45 sec |<-- NMR
+  Time for USP L Augment                                 8.42 sec |<-- NMR
+  Total Time for k-point:   2 of   5              63.48 sec       |<-- NMR
+  Starting k-point:   3 of   5                                    |<-- NMR
+  Diag Hamiltonian (k)   conv in   1 iter.    Time:      0.31 sec |<-- NMR
+  Time for Diamagnetic Augmentation                      0.02 sec |<-- NMR
+  Green function converged in  31 iterations. Time:      3.09 sec |<-- NMR
+  Green function converged in  31 iterations. Time:      3.47 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      2.77 sec |<-- NMR
+  Total Time for nmr_susceptibility               10.07 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.23 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.51 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.29 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Total Time for step 1 of 6:                      7.91 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      1.99 sec |<-- NMR
+  Time for Velocity operator                             0.08 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.29 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.22 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.60 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.22 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 2 of 6:                      7.77 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.41 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.27 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.28 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Time for Velocity operator                             0.03 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.65 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.22 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 3 of 6:                      8.26 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  14 iter.    Time:      2.33 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.07 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.31 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.37 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 4 of 6:                      7.72 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.17 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.34 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.25 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.47 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Total Time for step 5 of 6:                      7.86 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.24 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.71 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.47 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.29 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 6 of 6:                      8.40 sec       |<-- NMR
+  Green function converged in  28 iterations. Time:      2.64 sec |<-- NMR
+  Green function converged in  28 iterations. Time:      2.74 sec |<-- NMR
+  Green function converged in  27 iterations. Time:      2.53 sec |<-- NMR
+  Time for USP L Augment                                 8.68 sec |<-- NMR
+  Total Time for k-point:   3 of   5              67.00 sec       |<-- NMR
+  Starting k-point:   4 of   5                                    |<-- NMR
+  Diag Hamiltonian (k)   conv in   1 iter.    Time:      0.29 sec |<-- NMR
+  Time for Diamagnetic Augmentation                      0.01 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      2.85 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      3.01 sec |<-- NMR
+  Green function converged in  29 iterations. Time:      2.78 sec |<-- NMR
+  Total Time for nmr_susceptibility                9.29 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.31 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.76 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.04 sec |<-- NMR
+  Time for Current                                       0.31 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Time for Velocity operator                             0.03 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.38 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.31 sec |<-- NMR
+  Time for Chi                                           0.13 sec |<-- NMR
+  Total Time for step 1 of 6:                      8.58 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.40 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.09 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      1.88 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.20 sec |<-- NMR
+  Time for Chi                                           0.14 sec |<-- NMR
+  Total Time for step 2 of 6:                      7.24 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.22 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      1.98 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.25 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.01 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      1.88 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Total Time for step 3 of 6:                      6.92 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.30 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.51 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.27 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.15 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.29 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Total Time for step 4 of 6:                      7.97 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  11 iter.    Time:      2.22 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.15 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.21 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.14 sec |<-- NMR
+  Total Time for step 5 of 6:                      7.52 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.27 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.22 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.31 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  22 iterations. Time:      2.25 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.20 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Total Time for step 6 of 6:                      7.66 sec       |<-- NMR
+  Green function converged in  28 iterations. Time:      2.65 sec |<-- NMR
+  Green function converged in  28 iterations. Time:      2.37 sec |<-- NMR
+  Green function converged in  25 iterations. Time:      2.04 sec |<-- NMR
+  Time for USP L Augment                                 7.76 sec |<-- NMR
+  Total Time for k-point:   4 of   5              63.25 sec       |<-- NMR
+  Starting k-point:   5 of   5                                    |<-- NMR
+  Diag Hamiltonian (k)   conv in   1 iter.    Time:      0.32 sec |<-- NMR
+  Time for Diamagnetic Augmentation                      0.01 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      2.57 sec |<-- NMR
+  Green function converged in  30 iterations. Time:      2.73 sec |<-- NMR
+  Green function converged in  29 iterations. Time:      2.55 sec |<-- NMR
+  Total Time for nmr_susceptibility                8.43 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      2.08 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.03 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.03 sec |<-- NMR
+  Time for Current                                       0.24 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.96 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.31 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 1 of 6:                      7.01 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      2.10 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.94 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.22 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.69 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.23 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Total Time for step 2 of 6:                      6.57 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      1.88 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.80 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.19 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.28 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.20 sec |<-- NMR
+  Time for Chi                                           0.10 sec |<-- NMR
+  Total Time for step 3 of 6:                      6.73 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  13 iter.    Time:      1.72 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.05 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.19 sec |<-- NMR
+  Time for Chi                                           0.11 sec |<-- NMR
+  Time for Velocity operator                             0.03 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.88 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.30 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Total Time for step 4 of 6:                      6.54 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      1.81 sec |<-- NMR
+  Time for Velocity operator                             0.04 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.93 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.25 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.02 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.29 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Total Time for step 5 of 6:                      6.66 sec       |<-- NMR
+  Diag Hamiltonian (k+q) conv in  12 iter.    Time:      1.76 sec |<-- NMR
+  Time for Velocity operator                             0.05 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      2.00 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.21 sec |<-- NMR
+  Time for Chi                                           0.09 sec |<-- NMR
+  Time for Velocity operator                             0.02 sec |<-- NMR
+  Green function converged in  24 iterations. Time:      1.94 sec |<-- NMR
+  Time for Paramagnetic Augmentation                     0.02 sec |<-- NMR
+  Time for Current                                       0.19 sec |<-- NMR
+  Time for Chi                                           0.08 sec |<-- NMR
+  Total Time for step 6 of 6:                      6.46 sec       |<-- NMR
+  Green function converged in  28 iterations. Time:      2.24 sec |<-- NMR
+  Green function converged in  28 iterations. Time:      2.40 sec |<-- NMR
+  Green function converged in  27 iterations. Time:      1.84 sec |<-- NMR
+  Time for USP L Augment                                 7.20 sec |<-- NMR
+  Total Time for k-point:   5 of   5              55.94 sec       |<-- NMR
+
+Macroscopic Susceptibility      -58.7925   10^-6 cm^3 mol^-1
+
+             -61.4449      0.0001      0.0000
+               0.0001    -61.4448      0.0000
+               0.0000      0.0000    -53.4878
+
+Contribution to chemical shielding       -9.5600  ppm
+  Total Time for Chemical Shielding Tensors      313.04 sec       |<-- NMR
+
+  ===============================================================================
+  |                Chemical Shielding and Electric Field Gradient Tensors       |
+  |-----------------------------------------------------------------------------|
+  |     Nucleus                       Shielding tensor             EFG Tensor   |
+  |    Species            Ion    Iso(ppm)   Aniso(ppm)  Asym    Cq(MHz)    Eta  |
+  |    O                  1      169.85      -5.36      0.87   2.259E+00   0.50 |
+  |    O                  2      169.85      -5.36      0.87   2.259E+00   0.50 |
+  |    O                  3      169.85      -5.36      0.87   2.259E+00   0.50 |
+  |    O                  4      169.85      -5.36      0.87   2.259E+00   0.50 |
+  |    O                  5      169.85      -5.36      0.87   2.259E+00   0.50 |
+  |    O                  6      169.85      -5.36      0.87   2.259E+00   0.50 |
+  |    Al                 1      535.94     -13.35      0.00   2.305E+00   0.00 |
+  |    Al                 2      535.94     -13.35      0.00   2.305E+00   0.00 |
+  |    Al                 3      535.94     -13.35      0.00   2.305E+00   0.00 |
+  |    Al                 4      535.94     -13.35      0.00   2.305E+00   0.00 |
+  ===============================================================================
+
+ *********************** Ewald forces ***********************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1     32.15752      0.00007     -0.00012 *
+ * O               2    -16.07869    -27.84915      0.00001 *
+ * O               3    -16.07870     27.84932      0.00011 *
+ * O               4     16.07869     27.84915     -0.00001 *
+ * O               5     16.07870    -27.84932     -0.00011 *
+ * O               6    -32.15752     -0.00007      0.00012 *
+ * Al              1      0.00008      0.00001    -16.38836 *
+ * Al              2      0.00002     -0.00009    -16.38836 *
+ * Al              3     -0.00008     -0.00001     16.38836 *
+ * Al              4     -0.00002      0.00009     16.38836 *
+ *                                                          *
+ ************************************************************
+
+ ****************** Local potential forces ******************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1    -31.28944      0.00003      0.00004 *
+ * O               2     15.64472     27.09747      0.00001 *
+ * O               3     15.64474    -27.09746     -0.00004 *
+ * O               4    -15.64472    -27.09747     -0.00001 *
+ * O               5    -15.64474     27.09746      0.00004 *
+ * O               6     31.28944     -0.00003     -0.00004 *
+ * Al              1     -0.00005     -0.00002     15.49870 *
+ * Al              2     -0.00001      0.00007     15.49870 *
+ * Al              3      0.00005      0.00002    -15.49870 *
+ * Al              4      0.00001     -0.00007    -15.49870 *
+ *                                                          *
+ ************************************************************
+
+ **************** Non-local potential forces ****************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1     -1.25879     -0.42885     -0.01733 *
+ * O               2      0.59602      0.28576     -0.14264 *
+ * O               3      0.39059     -0.79012      0.13391 *
+ * O               4     -0.59602     -0.28575      0.14264 *
+ * O               5     -0.39059      0.79013     -0.13391 *
+ * O               6      1.25878      0.42884      0.01733 *
+ * Al              1      0.01653      0.02840      0.89128 *
+ * Al              2     -0.06980     -0.06119      0.89153 *
+ * Al              3     -0.01653     -0.02841     -0.89128 *
+ * Al              4      0.06980      0.06119     -0.89153 *
+ *                                                          *
+ ************************************************************
+
+ ************** External Efield and/or dipole ***************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1      0.00000      0.00000      0.00000 *
+ * O               2      0.00000      0.00000      0.00000 *
+ * O               3      0.00000      0.00000      0.00000 *
+ * O               4      0.00000      0.00000      0.00000 *
+ * O               5      0.00000      0.00000      0.00000 *
+ * O               6      0.00000      0.00000      0.00000 *
+ * Al              1      0.00000      0.00000      0.00000 *
+ * Al              2      0.00000      0.00000      0.00000 *
+ * Al              3      0.00000      0.00000      0.00000 *
+ * Al              4      0.00000      0.00000      0.00000 *
+ *                                                          *
+ ************************************************************
+
+ ***************** DM correction to forces ******************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1      0.00000      0.00000      0.00000 *
+ * O               2      0.00000      0.00000      0.00000 *
+ * O               3      0.00000      0.00000      0.00000 *
+ * O               4      0.00000      0.00000      0.00000 *
+ * O               5      0.00000      0.00000      0.00000 *
+ * O               6      0.00000      0.00000      0.00000 *
+ * Al              1      0.00000      0.00000      0.00000 *
+ * Al              2      0.00000      0.00000      0.00000 *
+ * Al              3      0.00000      0.00000      0.00000 *
+ * Al              4      0.00000      0.00000      0.00000 *
+ *                                                          *
+ ************************************************************
+
+ ******************** Symmetrised Forces ********************
+ *                                                          *
+ *               Cartesian components (eV/A)                *
+ * -------------------------------------------------------- *
+ *                         x            y            z      *
+ *                                                          *
+ * O               1     -0.02656      0.00000      0.00000 *
+ * O               2      0.01328      0.02300     -0.00000 *
+ * O               3      0.01328     -0.02300     -0.00000 *
+ * O               4     -0.01328     -0.02300      0.00000 *
+ * O               5     -0.01328      0.02300      0.00000 *
+ * O               6      0.02656     -0.00000     -0.00000 *
+ * Al              1      0.00000     -0.00000      0.00174 *
+ * Al              2      0.00000     -0.00000      0.00174 *
+ * Al              3     -0.00000      0.00000     -0.00174 *
+ * Al              4     -0.00000      0.00000     -0.00174 *
+ *                                                          *
+ ************************************************************
+
+ Pseudo atomic calculation performed for O 2s2 2p4
+
+ Converged in 33 iterations to a total energy of -431.1291 eV
+
+ Pseudo atomic calculation performed for Al 3s2 3p1
+
+ Converged in 20 iterations to a total energy of -105.9172 eV
+Charge spilling parameter for spin component 1 = 0.78%
+
+            Orbital Populations       
+     Ion    Atom   Orbital             Charge
+  -------------------------------------------
+      O     1      S                    1.832
+      O     1      Px                   1.717
+      O     1      Py                   1.762
+      O     1      Pz                   1.744
+      O     2      S                    1.833
+      O     2      Px                   1.739
+      O     2      Py                   1.732
+      O     2      Pz                   1.741
+      O     3      S                    1.833
+      O     3      Px                   1.740
+      O     3      Py                   1.731
+      O     3      Pz                   1.743
+      O     4      S                    1.833
+      O     4      Px                   1.740
+      O     4      Py                   1.731
+      O     4      Pz                   1.740
+      O     5      S                    1.833
+      O     5      Px                   1.740
+      O     5      Py                   1.730
+      O     5      Pz                   1.743
+      O     6      S                    1.832
+      O     6      Px                   1.717
+      O     6      Py                   1.761
+      O     6      Pz                   1.744
+     Al     1      S                    0.518
+     Al     1      Px                   0.295
+     Al     1      Py                   0.317
+     Al     1      Pz                   0.298
+     Al     2      S                    0.518
+     Al     2      Px                   0.302
+     Al     2      Py                   0.309
+     Al     2      Pz                   0.298
+     Al     3      S                    0.518
+     Al     3      Px                   0.295
+     Al     3      Py                   0.317
+     Al     3      Pz                   0.298
+     Al     4      S                    0.518
+     Al     4      Px                   0.302
+     Al     4      Py                   0.309
+     Al     4      Pz                   0.298
+  -------------------------------------------
+                           Total:      47.999
+  -------------------------------------------
+The total projected population is   47.999  -0.000
+
+     Atomic Populations (Mulliken)
+     -----------------------------
+Species          Ion     s       p       d       f      Total   Charge (e)
+==========================================================================
+  O               1     1.833   5.216   0.000   0.000   7.048    -1.048
+  O               2     1.833   5.216   0.000   0.000   7.048    -1.048
+  O               3     1.833   5.216   0.000   0.000   7.048    -1.048
+  O               4     1.833   5.216   0.000   0.000   7.048    -1.048
+  O               5     1.833   5.216   0.000   0.000   7.048    -1.048
+  O               6     1.833   5.216   0.000   0.000   7.048    -1.048
+  Al              1     0.518   0.910   0.000   0.000   1.427     1.573
+  Al              2     0.518   0.910   0.000   0.000   1.427     1.573
+  Al              3     0.518   0.910   0.000   0.000   1.427     1.573
+  Al              4     0.518   0.910   0.000   0.000   1.427     1.573
+==========================================================================
+
+                 Bond                   Population      Length (A)
+======================================================================
+               O 1 -- Al 2                   0.36        1.86027
+               O 6 -- Al 4                   0.36        1.86027
+               O 3 -- Al 3                   0.36        1.86027
+               O 5 -- Al 1                   0.36        1.86027
+               O 2 -- Al 2                   0.36        1.86027
+               O 4 -- Al 4                   0.36        1.86027
+               O 4 -- Al 1                   0.36        1.86027
+               O 2 -- Al 3                   0.36        1.86027
+               O 6 -- Al 1                   0.36        1.86027
+               O 1 -- Al 3                   0.36        1.86027
+               O 3 -- Al 2                   0.36        1.86027
+               O 5 -- Al 4                   0.36        1.86027
+               O 1 -- Al 4                   0.26        1.97445
+               O 6 -- Al 2                   0.26        1.97445
+               O 3 -- Al 4                   0.26        1.97445
+               O 5 -- Al 2                   0.26        1.97445
+               O 3 -- Al 1                   0.26        1.97445
+               O 5 -- Al 3                   0.26        1.97445
+               O 6 -- Al 3                   0.26        1.97445
+               O 1 -- Al 1                   0.26        1.97445
+               O 4 -- Al 3                   0.26        1.97445
+               O 2 -- Al 1                   0.26        1.97445
+               O 2 -- Al 4                   0.26        1.97445
+               O 4 -- Al 2                   0.26        1.97445
+               O 5 -- O 6                   -0.17        2.53024
+               O 1 -- O 3                   -0.17        2.53024
+               O 4 -- O 5                   -0.17        2.53024
+               O 2 -- O 3                   -0.17        2.53024
+               O 4 -- O 6                   -0.17        2.53024
+               O 1 -- O 2                   -0.17        2.53024
+               O 2 -- O 4                   -0.16        2.62456
+               O 1 -- O 6                   -0.16        2.62456
+               O 3 -- O 5                   -0.16        2.62456
+              Al 2 -- Al 3                  -0.52        2.65661
+              Al 1 -- Al 4                  -0.52        2.65661
+               O 3 -- O 4                   -0.10        2.73090
+               O 2 -- O 5                   -0.10        2.73090
+               O 3 -- O 6                   -0.10        2.73090
+               O 1 -- O 5                   -0.10        2.73090
+               O 2 -- O 6                   -0.10        2.73090
+               O 1 -- O 4                   -0.10        2.73090
+              Al 1 -- Al 3                  -0.65        2.79818
+              Al 2 -- Al 4                  -0.65        2.79818
+======================================================================
+
+
+Writing analysis data to al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.castep_bin
+
+Writing model to al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.check
+ 
+ A BibTeX formatted list of references used in this run has been written to 
+ al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.bib
+ 
+Initialisation time =      5.78 s
+Calculation time    =    363.07 s
+Finalisation time   =      0.09 s
+Total time          =    368.93 s
+Peak Memory Use     = 1006332 kB
+  
+Overall parallel efficiency rating: Excellent (98%)                             
+  
+Data was distributed by:-
+k-point (4-way); efficiency rating: Excellent (98%)                             
+  
+Parallel notes:
+1) Calculation only took 368.9 s, so efficiency estimates may be inaccurate.    
+2) k-points were not fully distributed, there were 5 k-points per process.      
