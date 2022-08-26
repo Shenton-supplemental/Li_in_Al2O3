@@ -1,0 +1,327 @@
+ OptaDOS: Execution started on 16 Aug 2022 at 14:52:40 
+          Parallelised over    1 thread(s)
+
+ +===========================================================================+
+ |                                                                           |
+ |                OOO   PPPP  TTTTT  AA   DDD    OOO    SSS                  |
+ |               O   O  P   P   T   A  A  D  D  O   O  S                     |
+ |               O   O  PPPP    T   AAAA  D  D  O   O   SS                   |
+ |               O   O  P       T   A  A  D  D  O   O     S                  |
+ |                OOO   P       T   A  A  DDD    OOO   SSS                   |
+ |                                                                           |
+ +---------------------------------------------------------------------------+
+ |                                                                           |
+ |                 Welcome to OptaDOS version  1.2                           | 
+ |                                                                           |
+ |         Andrew J. Morris, Rebecca Nicholls, Chris J. Pickard              |
+ |                       and Jonathan R. Yates                               |
+ |                                                                           |
+ |                       Copyright (c) 2010-2015                             |
+ |                                                                           |
+ |  Please cite:                                                             |
+ |  Andrew J. Morris, Rebecca Nicholls, Chris J. Pickard and Jonathan Yates  |
+ |              Comp. Phys. Comm. 185, 5, 1477 (2014)                        |
+ |                                                                           |
+ |  Additionally when using the linear broadening:                           |
+ | C.J. Pickard and M.C. Payne, Phys. Rev. B, 59, 7, 4685 (1999)             |
+ | C.J. Pickard and M.C. Payne, Phys. Rev. B, 62, 7, 4383 (2000)             |
+ |                                                                           |
+ |  Additionally when using the adaptive broadening:                         |
+ | J.Yates, X.Wang, D.Vanderbilt and I.Souza, Phys. Rev. B, 75, 195121 (2007)|
+ |                                                                           |
+ |      in all your publications arising from your use of OptaDOS            |
+ |                                                                           |
+ +===========================================================================+
+
+ +------------------------------ JOB CONTROL ---------------------------------+
+ |  Output Density of States                  :  False                        |
+ |  Output Partial Density of States          :  True                         |
+ |  Output Joint Density of States            :  False                        |
+ |  Output Optical Response                   :  False                        |
+ |  Output Core-level Spectra                 :  False                        |
+ |  iprint level                              :    1                          |
+ |  Use CASTEP < 6.0 file format              :  False                        |
+ +-------------------------------- UNITS -------------------------------------+
+ |  Length Unit                               :   Ang                         |
+ |  J/P/DOS units                             :  electrons eV^-1              |
+ +--------------------------SPECTRAL PARAMETERS ------------------------------+
+ |  Adaptive Width Smearing                   :  True                         |
+ |  Adaptive Smearing ratio                   :    0.40000                    |
+ |  Smearing Width                            :    0.00000                    |
+ |  Finite Bin Correction                     :  True                         |
+ |  Shift energy scale so fermi_energy=0      :  False                        |
+ |  Fermi energy                              :  Calculated by OptaDOS        |
+ |  Compute the band energy                   :  True                         |
+ |  Compute the band gap                      :  True                         |
+ +----------------------------------------------------------------------------+
+  
+  
+ +----------------------------------------------------------------------------+
+ |             Species                  Sites                  Total Atoms    |
+ +----------------------------------------------------------------------------+
+ |                O                    1 to   6                   6           |
+ |                Al                   7 to  10                   4           |
+ +----------------------------------------------------------------------------+
+  
+                              Lattice Vectors (Ang)
+                    a_1     2.386183  -2.386180  -0.000001
+                    a_2     1.377665   1.377662  -2.755327
+                    a_3     4.337554   4.337554   4.337553
+
+                        Reciprocal-Space Vectors (Ang^-1)
+                    b_1     1.316577   0.760125   0.482852
+                    b_2    -1.316578   0.760126   0.482852
+                    b_3     0.000001  -1.520252   0.482852
+
+                   Unit Cell Volume:      85.55447  (Ang^3)
+
+
+ +----------------------- Electronic Data ------------------------------------+
+ |  Number of Bands                           :            43                 |
+ |  Grid size                                 :       19 x 19 x 19            |
+ |  Number of K-points                        :           670                 |
+ |  Spin-Polarised Calculation                :           False               |
+ |  Number of electrons                       :            48.00              |
+ +----------------------------------------------------------------------------+
+
+ +============================================================================+
+ +                 Projected Density Of States Calculation                    +
+ +============================================================================+
+
+ +----------------------------- Fermi Energy Analysis ------------------------+
+ | From Adaptive broadening                                                   |
+ |   Spin Component : 1 occupation between   47.99814 and   48.00006   <- Occ |
+ |         Fermi energy (Adaptive broadening) :   4.8341 eV            <- EfA |
+ +----------------------------------------------------------------------------+
+ + Time to calculate Projected Density of States                  0.231 (sec) +
+ +============================================================================+
+  
+  
+
+ OptaDOS: Execution complete on 16 Aug 2022 at 14:52:40 
+ OptaDOS: Execution started on 16 Aug 2022 at 14:56:27 
+          Parallelised over    1 thread(s)
+
+ +===========================================================================+
+ |                                                                           |
+ |                OOO   PPPP  TTTTT  AA   DDD    OOO    SSS                  |
+ |               O   O  P   P   T   A  A  D  D  O   O  S                     |
+ |               O   O  PPPP    T   AAAA  D  D  O   O   SS                   |
+ |               O   O  P       T   A  A  D  D  O   O     S                  |
+ |                OOO   P       T   A  A  DDD    OOO   SSS                   |
+ |                                                                           |
+ +---------------------------------------------------------------------------+
+ |                                                                           |
+ |                 Welcome to OptaDOS version  1.2                           | 
+ |                                                                           |
+ |         Andrew J. Morris, Rebecca Nicholls, Chris J. Pickard              |
+ |                       and Jonathan R. Yates                               |
+ |                                                                           |
+ |                       Copyright (c) 2010-2015                             |
+ |                                                                           |
+ |  Please cite:                                                             |
+ |  Andrew J. Morris, Rebecca Nicholls, Chris J. Pickard and Jonathan Yates  |
+ |              Comp. Phys. Comm. 185, 5, 1477 (2014)                        |
+ |                                                                           |
+ |  Additionally when using the linear broadening:                           |
+ | C.J. Pickard and M.C. Payne, Phys. Rev. B, 59, 7, 4685 (1999)             |
+ | C.J. Pickard and M.C. Payne, Phys. Rev. B, 62, 7, 4383 (2000)             |
+ |                                                                           |
+ |  Additionally when using the adaptive broadening:                         |
+ | J.Yates, X.Wang, D.Vanderbilt and I.Souza, Phys. Rev. B, 75, 195121 (2007)|
+ |                                                                           |
+ |      in all your publications arising from your use of OptaDOS            |
+ |                                                                           |
+ +===========================================================================+
+
+ +------------------------------ JOB CONTROL ---------------------------------+
+ |  Output Density of States                  :  False                        |
+ |  Output Partial Density of States          :  True                         |
+ |  Output Joint Density of States            :  False                        |
+ |  Output Optical Response                   :  False                        |
+ |  Output Core-level Spectra                 :  False                        |
+ |  iprint level                              :    1                          |
+ |  Use CASTEP < 6.0 file format              :  False                        |
+ +-------------------------------- UNITS -------------------------------------+
+ |  Length Unit                               :   Ang                         |
+ |  J/P/DOS units                             :  electrons eV^-1              |
+ +--------------------------SPECTRAL PARAMETERS ------------------------------+
+ |  Adaptive Width Smearing                   :  True                         |
+ |  Adaptive Smearing ratio                   :    0.40000                    |
+ |  Smearing Width                            :    0.00000                    |
+ |  Finite Bin Correction                     :  True                         |
+ |  Shift energy scale so fermi_energy=0      :  False                        |
+ |  Fermi energy                              :  Calculated by OptaDOS        |
+ |  Compute the band energy                   :  True                         |
+ |  Compute the band gap                      :  True                         |
+ +----------------------------------------------------------------------------+
+  
+  
+ +----------------------------------------------------------------------------+
+ |             Species                  Sites                  Total Atoms    |
+ +----------------------------------------------------------------------------+
+ |                O                    1 to   6                   6           |
+ |                Al                   7 to  10                   4           |
+ +----------------------------------------------------------------------------+
+  
+                              Lattice Vectors (Ang)
+                    a_1     2.386183  -2.386180  -0.000001
+                    a_2     1.377665   1.377662  -2.755327
+                    a_3     4.337554   4.337554   4.337553
+
+                        Reciprocal-Space Vectors (Ang^-1)
+                    b_1     1.316577   0.760125   0.482852
+                    b_2    -1.316578   0.760126   0.482852
+                    b_3     0.000001  -1.520252   0.482852
+
+                   Unit Cell Volume:      85.55447  (Ang^3)
+
+
+ +----------------------- Electronic Data ------------------------------------+
+ |  Number of Bands                           :            43                 |
+ |  Grid size                                 :       19 x 19 x 19            |
+ |  Number of K-points                        :           670                 |
+ |  Spin-Polarised Calculation                :           False               |
+ |  Number of electrons                       :            48.00              |
+ +----------------------------------------------------------------------------+
+
+ +============================================================================+
+ +                 Projected Density Of States Calculation                    +
+ +============================================================================+
+
+ +----------------------------- Fermi Energy Analysis ------------------------+
+ | From Adaptive broadening                                                   |
+ |   Spin Component : 1 occupation between   47.99814 and   48.00006   <- Occ |
+ |         Fermi energy (Adaptive broadening) :   4.8341 eV            <- EfA |
+ +----------------------------------------------------------------------------+
+ + Time to calculate Projected Density of States                  0.164 (sec) +
+ +============================================================================+
+  
+  
+
+ OptaDOS: Execution complete on 16 Aug 2022 at 14:56:27 
+ OptaDOS: Execution started on 16 Aug 2022 at 14:59:10 
+          Parallelised over    1 thread(s)
+
+ +===========================================================================+
+ |                                                                           |
+ |                OOO   PPPP  TTTTT  AA   DDD    OOO    SSS                  |
+ |               O   O  P   P   T   A  A  D  D  O   O  S                     |
+ |               O   O  PPPP    T   AAAA  D  D  O   O   SS                   |
+ |               O   O  P       T   A  A  D  D  O   O     S                  |
+ |                OOO   P       T   A  A  DDD    OOO   SSS                   |
+ |                                                                           |
+ +---------------------------------------------------------------------------+
+ |                                                                           |
+ |                 Welcome to OptaDOS version  1.2                           | 
+ |                                                                           |
+ |         Andrew J. Morris, Rebecca Nicholls, Chris J. Pickard              |
+ |                       and Jonathan R. Yates                               |
+ |                                                                           |
+ |                       Copyright (c) 2010-2015                             |
+ |                                                                           |
+ |  Please cite:                                                             |
+ |  Andrew J. Morris, Rebecca Nicholls, Chris J. Pickard and Jonathan Yates  |
+ |              Comp. Phys. Comm. 185, 5, 1477 (2014)                        |
+ |                                                                           |
+ |  Additionally when using the linear broadening:                           |
+ | C.J. Pickard and M.C. Payne, Phys. Rev. B, 59, 7, 4685 (1999)             |
+ | C.J. Pickard and M.C. Payne, Phys. Rev. B, 62, 7, 4383 (2000)             |
+ |                                                                           |
+ |  Additionally when using the adaptive broadening:                         |
+ | J.Yates, X.Wang, D.Vanderbilt and I.Souza, Phys. Rev. B, 75, 195121 (2007)|
+ |                                                                           |
+ |      in all your publications arising from your use of OptaDOS            |
+ |                                                                           |
+ +===========================================================================+
+
+ +------------------------------ JOB CONTROL ---------------------------------+
+ |  Output Density of States                  :  True                         |
+ |  Output Partial Density of States          :  False                        |
+ |  Output Joint Density of States            :  False                        |
+ |  Output Optical Response                   :  False                        |
+ |  Output Core-level Spectra                 :  False                        |
+ |  iprint level                              :    1                          |
+ |  Use CASTEP < 6.0 file format              :  False                        |
+ +-------------------------------- UNITS -------------------------------------+
+ |  Length Unit                               :   Ang                         |
+ |  J/P/DOS units                             :  electrons eV^-1              |
+ +--------------------------SPECTRAL PARAMETERS ------------------------------+
+ |  Adaptive Width Smearing                   :  True                         |
+ |  Adaptive Smearing ratio                   :    0.40000                    |
+ |  Smearing Width                            :    0.00000                    |
+ |  Finite Bin Correction                     :  True                         |
+ |  Shift energy scale so fermi_energy=0      :  False                        |
+ |  Fermi energy                              :  Calculated by OptaDOS        |
+ |  Compute the band energy                   :  True                         |
+ |  Compute the band gap                      :  True                         |
+ +----------------------------------------------------------------------------+
+  
+  
+                              Lattice Vectors (Ang)
+                    a_1     2.386183  -2.386180  -0.000001
+                    a_2     1.377665   1.377662  -2.755327
+                    a_3     4.337554   4.337554   4.337553
+
+                        Reciprocal-Space Vectors (Ang^-1)
+                    b_1     1.316577   0.760125   0.482852
+                    b_2    -1.316578   0.760126   0.482852
+                    b_3     0.000001  -1.520252   0.482852
+
+                   Unit Cell Volume:      85.55447  (Ang^3)
+
+
+ +----------------------- Electronic Data ------------------------------------+
+ |  Number of Bands                           :            43                 |
+ |  Grid size                                 :       19 x 19 x 19            |
+ |  Number of K-points                        :           670                 |
+ |  Spin-Polarised Calculation                :           False               |
+ |  Number of electrons                       :            48.00              |
+ +----------------------------------------------------------------------------+
+
+ +============================================================================+
+ +                              Density of States                             +
+ +============================================================================+
+
+ +----------------------------- Fermi Energy Analysis ------------------------+
+ | From Adaptive broadening                                                   |
+ |   Spin Component : 1 occupation between   47.99814 and   48.00006   <- Occ |
+ |         Fermi energy (Adaptive broadening) :   4.8341 eV            <- EfA |
+ +----------------------------------------------------------------------------+
+ +--------------------------- Setting Fermi Energy  --------------------------+
+ |                      Fermi energy from DOS :   4.8341 eV            <- EfD |
+ +----------------------------------------------------------------------------+
+
+ +----------------------- DOS at Fermi Energy Analysis -----------------------+
+ |                          Fermi energy used :   4.8341 eV                   |
+ | From Adaptive broadening                                                   |
+ |   Spin Component : 1   DOS at Fermi Energy :   0.0028 eln/cell      <- DEA |
+ +----------------------------------------------------------------------------+
+
+ +----------------------------- Bandgap Analysis -----------------------------+
+ |          Number of kpoints at       VBM       CBM                          |
+ |                   Spin :   1  :      1         1                           |
+ |               Thermal Bandgap :   6.0420305428  eV                  <- TBg |
+ |                     At kpoint :    0.00000    0.00000    0.00000           |
+ |             ==> Direct Gap                                                  
+ +----------------------------------------------------------------------------+
+ |                            Optical Bandgap                                 |
+ |                   Spin :   1  :     6.0420305428  eV                <- OBg |
+ |          Number of kpoints with this gap                                   |
+ |                   Spin :   1  :           1                                |
+ +----------------------------------------------------------------------------+
+ |                            Average Bandgap                                 |
+ |                   Spin :   1  :     8.7710345100  eV                <- ABg |
+ +----------------------------------------------------------------------------+
+ |                                                                            |
+ +--------------------------- Band Energy Analysis ---------------------------+
+ |          Band energy (Adaptive broadening) :     -86.4972 eV        <- BEA |
+ |                  Band energy (From CASTEP) :     -86.4971 eV        <- BEC |
+ +----------------------------------------------------------------------------+
+
+ + Time to calculate Density of States                            0.119 (sec) +
+ +============================================================================+
+  
+  
+
+ OptaDOS: Execution complete on 16 Aug 2022 at 14:59:10 

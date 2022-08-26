@@ -1,0 +1,34 @@
+#######################################################
+#CASTEP param file: /home/jks/scratch/Al2O3/beta-NMR-al2o3/pristine_nmr_calc/al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.param
+#Created using the Atomic Simulation Environment (ASE)#
+# Internal settings of the calculator
+# This can be switched off by settings
+# calc._export_settings = False
+# If stated, this will be automatically processed
+# by ase.io.castep.read_seed()
+# ASE_INTERFACE _build_missing_pspots : True
+# ASE_INTERFACE _castep_command : export OMP_NUM_THREADS=1; mpirun -np 4 castep.mpi
+# ASE_INTERFACE _castep_pp_path : /home/jks/scratch/Al2O3/beta-NMR-al2o3
+# ASE_INTERFACE _check_checkfile : True
+# ASE_INTERFACE _copy_pspots : False
+# ASE_INTERFACE _directory : /home/jks/scratch/Al2O3/beta-NMR-al2o3/pristine_nmr_calc
+# ASE_INTERFACE _export_settings : True
+# ASE_INTERFACE _find_pspots : False
+# ASE_INTERFACE _force_write : True
+# ASE_INTERFACE _label : al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr
+# ASE_INTERFACE _link_pspots : True
+# ASE_INTERFACE _pedantic : False
+# ASE_INTERFACE _prepare_input_only : False
+# ASE_INTERFACE _rename_existing_dir : False
+# ASE_INTERFACE _set_atoms : True
+# ASE_INTERFACE _track_output : False
+# ASE_INTERFACE _try_reuse : False
+#######################################################
+
+TASK: MAGRES
+CUT_OFF_ENERGY: 900.0 
+IPRINT: 2
+OPT_STRATEGY: speed
+XC_FUNCTIONAL: pbesol
+NUM_DUMP_CYCLES: 0
+MAGRES_TASK: NMR

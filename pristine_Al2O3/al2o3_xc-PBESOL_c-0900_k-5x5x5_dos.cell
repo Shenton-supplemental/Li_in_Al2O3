@@ -1,0 +1,30 @@
+#######################################################
+#CASTEP cell file: /home/jks/scratch/Al2O3/beta-NMR-al2o3/pristine_nmr_calc/al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.cell
+#Created using the Atomic Simulation Environment (ASE)#
+#######################################################
+
+%BLOCK LATTICE_CART
+ 2.386183  1.377665  4.337554
+-2.386180  1.377662  4.337554
+-0.000001 -2.755327  4.337553
+%ENDBLOCK LATTICE_CART
+
+%BLOCK POSITIONS_ABS
+O -0.925345  1.377663  7.590719
+O  1.655765  0.112544  7.590719
+O -0.730417 -1.490206  7.590718
+O -1.655764 -0.112543  5.421942
+O  0.730417  1.490211  5.421942
+O  0.925347 -1.377662  5.421942
+Al  0.000000  0.000000  1.924859
+Al  0.000001  0.000001  8.431189
+Al  0.000001  0.000001 11.087802
+Al  0.000001  0.000000  4.581472
+%ENDBLOCK POSITIONS_ABS
+
+SYMMETRY_GENERATE: TRUE
+KPOINT_MP_GRID: 5 5 5
+SNAP_TO_SYMMETRY: TRUE
+
+spectral_kpoints_mp_grid 19 19 19
+

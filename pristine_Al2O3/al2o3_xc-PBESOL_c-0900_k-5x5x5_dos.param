@@ -1,0 +1,12 @@
+TASK: Spectral
+spectral_task             dos
+PDOS_CALCULATE_WEIGHTS True
+reuse                     al2o3_xc-PBESOL_c-0900_k-5x5x5_nmr.check
+spectral_perc_extra_bands 80
+CUT_OFF_ENERGY: 900.0 
+IPRINT: 2
+OPT_STRATEGY: speed
+XC_FUNCTIONAL: pbesol
+NUM_DUMP_CYCLES: 0
+!continuation: default
+

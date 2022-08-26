@@ -1,0 +1,9 @@
+/home/jks/miniconda3/envs/al2o3_SM/bin/sumo-dosplot --code castep -f ./pristine_Al2O3/al2o3_xc-PBESOL_c-0900_k-5x5x5_dos.bands -g 0.1 --xmax 10 --xmin -8 -d ./pristine_Al2O3/ --format png --dpi 600
+Found PDOS binary file ./pristine_Al2O3/al2o3_xc-PBESOL_c-0900_k-5x5x5_dos.pdos_bin; including PDOS in the plot.
+Reading CASTEP .bands file header...
+nbands: 43, efermi / Ry: 0.355152, spin channels: 1
+Reading band eigenvalues...
+Electronic structure appears to have a bandgap
+Setting energy zero to VBM
+findfont: Font family ['sans-serif'] not found. Falling back to DejaVu Sans.
+findfont: Generic family 'sans-serif' not found because none of the following families were found: Whitney Pro, Whitney Book Extended, Catamaran, Helvetica, Liberation Sans, Andale Sans, Arial
