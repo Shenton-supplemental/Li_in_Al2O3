@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/529431877.svg)](https://zenodo.org/badge/latestdoi/529431877)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7030274.svg)](https://doi.org/10.5281/zenodo.7030274)
 # Supplemental material for _The  <sup>8</sup>Li<sup>+</sup> site in α-Al<sub>2</sub>O<sub>3</sub>_
 
 
